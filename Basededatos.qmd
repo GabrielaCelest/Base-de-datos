@@ -1,0 +1,64 @@
+---
+title: "Base de datos"
+format: html
+editor: visual
+---
+
+## Base de datos
+
+Instalación de cargas de librerías
+
+```{r}
+install.packages("truncnorm")
+library(truncnorm)
+set.seed(123)
+```
+
+Número de observaciones
+
+```{r}
+n <- 1000
+```
+
+Creación de variables
+
+```{r}
+ID  <- 1:n
+Y   <- sample(-20:20, n, replace = TRUE)   # Enteros entre -20 y 20
+X   <- runif(n, 0, 1)                      # Uniforme entre 0 y 1
+X2  <- runif(n, 0, 1)                      # Uniforme entre 0 y 1
+```
+
+-   Edad
+
+<!-- -->
+
+-   Frecuencia cardiaca
+
+```{r}
+X3  <- round(rtruncnorm(n, a = 18, b = 60, mean = 30, sd = 10))
+X4  <- sample(70:150, n, replace = TRUE)
+X5  <- sample(0:4, n, replace = TRUE)
+```
+
+Construcción del dataset
+
+```{r}
+data <- data.frame(ID, Y, X, X2, X3, X4, X5)
+head(data)
+View(data)
+```
+
+Exportar a excel
+
+```{r}
+library(openxlsx)
+write.xlsx(data, file = "dataset_variables.xlsx")
+par(mfrow = c(2,3)) # 2 filas x 3 columnas de gráficos
+hist(Y,  main="Y (-20 a 20)", col="skyblue", border="white")
+hist(X,  main="X (0-1)", col="skyblue", border="white")
+hist(X2, main="X2 (0-1)", col="skyblue", border="white")
+hist(X3, main="Edad (18-60)", col="skyblue", border="white")
+hist(X4, main="Frecuencia cardiaca (70-150)", col="skyblue", border="white")
+hist(X5, main="NSE (0-4)", col="skyblue",border="white")
+```
