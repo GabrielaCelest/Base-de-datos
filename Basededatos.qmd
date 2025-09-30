@@ -29,16 +29,16 @@ X   <- runif(n, 0, 1)                      # Uniforme entre 0 y 1
 X2  <- runif(n, 0, 1)                      # Uniforme entre 0 y 1
 ```
 
--   Edad
+- Edad con distribución parecida a Perú: más jóvenes, menos adultos mayores
 
-<!-- -->
+- Frecuencia cardiaca (70-150)
 
--   Frecuencia cardiaca
+- Niveles socioeconómicos (0=A, 1=B, 2=C, 3=D, 4=E) con probabilidades reales de Perú
 
 ```{r}
 X3  <- round(rtruncnorm(n, a = 18, b = 60, mean = 30, sd = 10))
 X4  <- sample(70:150, n, replace = TRUE)
-X5  <- sample(0:4, n, replace = TRUE)
+X5  <- sample(0:4, n, replace = TRUE, prob = c(0.05, 0.15, 0.30, 0.35, 0.15))
 ```
 
 Construcción del dataset
@@ -60,5 +60,5 @@ hist(X,  main="X (0-1)", col="skyblue", border="white")
 hist(X2, main="X2 (0-1)", col="skyblue", border="white")
 hist(X3, main="Edad (18-60)", col="skyblue", border="white")
 hist(X4, main="Frecuencia cardiaca (70-150)", col="skyblue", border="white")
-hist(X5, main="NSE (0-4)", col="skyblue",border="white")
+hist(X5, main="NSE(0=A,1=B,2=C,3=D,4=E)", col="skyblue",border="white")
 ```
